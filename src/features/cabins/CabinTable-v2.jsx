@@ -4,9 +4,15 @@ import { getCabins } from "../../services/apiCabins";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from '../../ui/Spinner'
 import CabinRow from "./CabinRow";
-import Table from "../../ui/Table";
-import Empty from "../../ui/Empty";
 
+const Table = styled.div`
+  border: 1px solid var(--color-grey-200);
+
+  font-size: 1.4rem;
+  background-color: var(--color-grey-0);
+  border-radius: 7px;
+  overflow: hidden;
+`;
 
 const TableHeader = styled.header`
   display: grid;
@@ -34,10 +40,6 @@ const CabinTable = () => {
 
   //Loader
   if(isLoading) return <Spinner />
-  //No cabins
-  if(cabins.length === 0){
-    return <Empty resource="cabins" />
-  }
 
   const filterValue = searchParams.get('discount') || 'all'
 
@@ -63,26 +65,17 @@ const CabinTable = () => {
 
 
   return (
-    <Table columns='0.6fr 1.8fr 2.2fr 1fr 1fr 1fr'>
-      <Table.Header role="row">
+    <Table role="table">
+      <TableHeader role="row">
         <div></div>
         <div>Cabin</div>
         <div>Capacity</div>
         <div>Price</div>
         <div>Discount</div>
         <div></div>
-      </Table.Header>
+      </TableHeader>
       {/* {cabins.map(cabin => <CabinRow key={cabin.id} cabin={cabin} />) } */}
-      {/* {filteredCabins.map(cabin => <CabinRow key={cabin.id} cabin={cabin} />) } */}
-
-      <Table.Body>
       {filteredCabins.map(cabin => <CabinRow key={cabin.id} cabin={cabin} />) }
-      </Table.Body>
-
-      {/* <Table.Body 
-      data={filteredCabins} 
-      render={cabin => <CabinRow key={cabin.id} cabin={cabin} />}
-      /> */}
     </Table>
   )
 }

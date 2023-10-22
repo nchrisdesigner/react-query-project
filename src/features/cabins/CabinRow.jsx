@@ -3,18 +3,19 @@ import { useState } from "react";
 import { useDeleteCabin } from "./useDeleteCabin";
 import {formatCurrency} from '../../utils/helpers'
 import CreateCabinForm from "./CreateCabinForm";
+import Table from "../../ui/Table";
 
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
+// const TableRow = styled.div`
+//   display: grid;
+//   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
+//   column-gap: 2.4rem;
+//   align-items: center;
+//   padding: 1.4rem 2.4rem;
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
+//   &:not(:last-child) {
+//     border-bottom: 1px solid var(--color-grey-100);
+//   }
+// `;
 
 const Img = styled.img`
   display: block;
@@ -67,17 +68,26 @@ const Discount = styled.div`
 
     return (
       <>
-        <TableRow role="row">
+        {/* <TableRow role="row">
           <Img src={image} />
           <Cabin>{name}</Cabin>
           <div>{maxCapacity}</div>
           <Price>{formatCurrency(regularPrice)}</Price>
           {discount ? <Discount>{formatCurrency(discount)}</Discount> : <span>&mdash;</span> }
           <div>
-            {/* <button onClick={() => setShowForm( show => !show)}>Edit</button> */}
             <button disabled={isDeleting} onClick={() => deleteCabin(cabinId)}>Delete</button>
           </div>
-        </TableRow>
+        </TableRow> */}
+        <Table.Row>
+          <Img src={image} />
+            <Cabin>{name}</Cabin>
+            <div>{maxCapacity}</div>
+            <Price>{formatCurrency(regularPrice)}</Price>
+            {discount ? <Discount>{formatCurrency(discount)}</Discount> : <span>&mdash;</span> }
+            <div>
+              <button disabled={isDeleting} onClick={() => deleteCabin(cabinId)}>Delete</button>
+            </div>
+        </Table.Row>
 
         {showForm && <CreateCabinForm cabinToEdit={cabin} />}
       </>
