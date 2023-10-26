@@ -43,6 +43,17 @@ const Discount = styled.div`
   font-weight: 500;
   color: var(--color-green-700);
 `;
+
+const Button = styled.button`
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  background-color: #e7f4ff;
+  padding: .5rem 1rem;
+  border: none;
+  color: #a1a1a1;
+  border-radius:25px
+`
  
  const CabinRow = ({cabin}) => {
     const [showForm, setShowForm] = useState(false)
@@ -85,7 +96,7 @@ const Discount = styled.div`
             <Price>{formatCurrency(regularPrice)}</Price>
             {discount ? <Discount>{formatCurrency(discount)}</Discount> : <span>&mdash;</span> }
             <div>
-              <button disabled={isDeleting} onClick={() => deleteCabin(cabinId)}>Delete</button>
+              <Button disabled={isDeleting} onClick={() => deleteCabin(cabinId)}>Delete</Button>
             </div>
         </Table.Row>
 
