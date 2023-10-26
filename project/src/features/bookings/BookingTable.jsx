@@ -1,9 +1,25 @@
 import BookingRow from "./BookingRow";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
+import Empty from "../../ui/Empty";
+import { useBookings } from "./useBookings";
+import Pagination from "../../ui/Pagination";
+
 
 function BookingTable() {
-  const bookings = [];
+  // const bookings = [];
+
+  const {isLoading, bookings, count} = useBookings()
+  console.log(bookings);
+  console.log(isLoading);
+
+  if(isLoading){
+    return <div>Loading...</div>
+  }
+
+  if(!bookings.length){
+    return <Empty resource="bookings" />
+  }
 
   return (
     <Menus>
@@ -17,12 +33,22 @@ function BookingTable() {
           <div></div>
         </Table.Header>
 
-        <Table.Body
+        {/* <Table.Body
           data={bookings}
           render={(booking) => (
             <BookingRow key={booking.id} booking={booking} />
           )}
-        />
+        /> */}
+
+        <Table.Body>
+          {bookings.map((booking) => (
+            <BookingRow key={booking.id} booking={booking} />
+          ))}
+        </Table.Body>
+
+        <Table.Footer>
+          <Pagination count={count} />
+        </Table.Footer>
       </Table>
     </Menus>
   );

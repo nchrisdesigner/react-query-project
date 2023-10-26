@@ -6,4 +6,5 @@ const TableOperations = styled.div`
   gap: 1.6rem;
 `;
 
+
 export default TableOperations;
