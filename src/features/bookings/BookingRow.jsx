@@ -7,8 +7,10 @@ import Table from "../../ui/Table";
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 
-import {HiEye} from 'react-icons/hi'
+import {LiaInfoCircleSolid} from 'react-icons/lia'
+import {RiDeleteBin7Line} from 'react-icons/ri'
 import { useNavigate } from "react-router-dom";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -40,9 +42,9 @@ const Amount = styled.div`
 const Button = styled.button`
   background:transparent;
   border:none;
-  color: #8f8f8f;
+  color: #2d2d2d;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 2rem;
   outline: none;
 `
 
@@ -67,6 +69,7 @@ function BookingRow({
   };
 
   const navigate = useNavigate()
+  const {deleteBooking, isDeleting} = useDeleteBooking()
 
   return (
     
@@ -94,7 +97,11 @@ function BookingRow({
       <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
-      <Button onClick={() => navigate(`/bookings/${bookingId}`)}>Details</Button>
+
+      <div style={{display: 'flex', gap: '.5rem', alignItems: 'center'}}>
+        <Button onClick={() => navigate(`/bookings/${bookingId}`)}><LiaInfoCircleSolid /></Button>
+        <Button onClick={() => deleteBooking(bookingId)}><RiDeleteBin7Line /></Button>
+      </div>
     </Table.Row>
   );
 }
