@@ -7,11 +7,7 @@ import Pagination from "../../ui/Pagination";
 
 
 function BookingTable() {
-  // const bookings = [];
-
   const {isLoading, bookings, count} = useBookings()
-  console.log(bookings);
-  console.log(isLoading);
 
   if(isLoading){
     return <div>Loading...</div>

@@ -15,6 +15,7 @@ import Settings from './pages/Settings';
 import BookingPage from './pages/BookingPage';
 import CheckinBooking from './features/check-in-out/CheckinBooking';
 
+
 // QY0BHqVq0o9Ji5Qw 
 
 const queryClient = new QueryClient({
@@ -29,7 +30,6 @@ const App = () => {
   return (
    <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialOpen={true} />
-   
     <GlobalStyles />
     <BrowserRouter>
       <Routes>
