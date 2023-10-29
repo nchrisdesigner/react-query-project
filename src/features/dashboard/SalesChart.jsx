@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import DashboardBox from "./DashboardBox";
-import {AreaChart, Area, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts'
+import {AreaChart, Area, CartesianGrid, Tooltip, XAxis, YAxis, ResponsiveContainer} from 'recharts'
 import {useDarkMode} from './../../context/DarkModeContext'
 
 const StyledSalesChart = styled(DashboardBox)`
@@ -68,14 +68,18 @@ const SalesChart = ({bookings, numDays}) => {
     <StyledSalesChart>
       <h2>Sales</h2>
 
-      <AreaChart data={fakeData} height={300} width={700}>
-        <XAxis dataKey='label' tick={{fill: colors.text}} tickLine={{stroke: colors.text }} />
-        <YAxis unit="$" tick={{fill: colors.text}} tickLine={{stroke: colors.text }} />
-        <CartesianGrid strokeDasharray={4} />
-        <Tooltip contentStyle={{backgroundColor: colors.background}} />
-        <Area dataKey='totalSales' type='monotone' stroke={colors.totalSales.stroke} fill={colors.totalSales.fill} unit="$" />
-        <Area dataKey='extrasSales' type='monotone' stroke={colors.extrasSales.stroke} fill={colors.extrasSales.fill} unit="$" />
-      </AreaChart>
+      <ResponsiveContainer height={300} width='100%' >
+        <AreaChart data={fakeData} >
+          <XAxis dataKey='label' tick={{fill: colors.text}} tickLine={{stroke: colors.text }} />
+          <YAxis unit="$" tick={{fill: colors.text}} tickLine={{stroke: colors.text }} />
+          <CartesianGrid strokeDasharray={4} />
+          <Tooltip contentStyle={{backgroundColor: colors.background}} />
+          <Area dataKey='totalSales' type='monotone' stroke={colors.totalSales.stroke} fill={colors.totalSales.fill} unit="$" />
+          <Area dataKey='extrasSales' type='monotone' stroke={colors.extrasSales.stroke} fill={colors.extrasSales.fill} unit="$" />
+        </AreaChart>
+      </ResponsiveContainer>
+
+      
     </StyledSalesChart>
   )
 }
